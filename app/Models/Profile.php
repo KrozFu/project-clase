@@ -13,5 +13,12 @@ class Profile extends Model
         'id',
         'phone_number',
         'url_facebook',
+        'user_id'
     ];
+
+    //indicear que le pertenece a un usuario
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

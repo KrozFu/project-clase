@@ -13,4 +13,16 @@ class Role extends Model
         'id',
         'name'
     ];
+
+    //Relacion 1 a n
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
+
+    //Relacion n a n
+    public function permissions()
+    {
+        return $this->belongsToMany(Permission::class);
+    }
 }

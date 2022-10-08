@@ -14,39 +14,42 @@ class RolesController extends Controller
 
     public function show($id)
     {
-        $the_role = Role::find($id);
-        if (is_null($the_role)) {
+        $the_Role = Role::find($id);
+        if (is_null($the_Role)) {
             return response()->json(['message' => 'Not found'], 404);
         } else {
-            return response()->json($the_role, 200);
+            $the_Role->users;
+            $the_Role->permissions;
+            return response()->json($the_Role, 200);
         }
+        return $the_Role;
     }
 
     public function store(Request $request)
     {
-        $the_role = Role::create($request->all());
-        return response($the_role, 201);
+        $the_Role = Role::create($request->all());
+        return response($the_Role, 201);
     }
 
     public function update(Request $request, $id)
     {
-        $the_role = Role::find($id);
-        if (is_null($the_role)) {
+        $the_Role = Role::find($id);
+        if (is_null($the_Role)) {
             return response()->json(['message' => 'Not found'], 404);
         } else {
-            $the_role->update($request->all());
-            return response()->json($the_role, 200);
+            $the_Role->update($request->all());
+            return response()->json($the_Role, 200);
         }
     }
 
     public function destroy(Request $request, $id)
     {
-        $the_role = Role::find($id);
+        $the_Role = Role::find($id);
 
-        if (is_null($the_role)) {
+        if (is_null($the_Role)) {
             return response()->json(['message' => 'Not found'], 404);
         } else {
-            $the_role->delete();
+            $the_Role->delete();
             return response()->json(null, 204);
         }
     }
