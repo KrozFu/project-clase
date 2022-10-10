@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('permission_role', function (Blueprint $table) {
+        Schema::create('permission__roles', function (Blueprint $table) {
             $table->id();
             //Agregar las columnas que contendrán los datos foráneos
             $table->bigInteger('role_id')->unsigned();
@@ -37,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('permission__roles');
     }
 };

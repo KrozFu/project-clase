@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Permission_RoleController;
 use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\ProfilesController;
 use App\Http\Controllers\RolesController;
+use App\Http\Controllers\SecurityController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -13,6 +15,15 @@ use App\Models\Profile;
 | API Routes
 |--------------------------------------------------------------------------
 */
+
+Route::controller(SecurityController::class)->group(function () {
+    Route::post('login', 'login');
+    Route::post('logout', 'logout');
+});
+
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
 
 Route::controller(UserController::class)->group(function () {
     Route::get('users', 'index'); //Para obtener todos
@@ -44,4 +55,12 @@ Route::controller(RolesController::class)->group(function () {
     Route::post('roles', 'store'); //Para guardar
     Route::put('roles/{id}', 'update'); //Para actualizar
     Route::delete('roles/{id}', 'destroy'); //Para eliminar un registro
+});
+
+Route::controller(Permission_RoleController::class)->group(function () {
+    Route::get('permission__roles', 'index'); //Para obtener todos
+    Route::get('permission__roles/{id}', 'show'); //Para consultar especifico
+    Route::post('permission__roles', 'store'); //Para guardar
+    Route::put('permission__roles/{id}', 'update'); //Para actualizar
+    Route::delete('permission__roles/{id}', 'destroy'); //Para eliminar un registro
 });
