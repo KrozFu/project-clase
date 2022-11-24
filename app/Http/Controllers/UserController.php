@@ -20,6 +20,7 @@ class UserController extends Controller
             return response()->json(['message' => 'Not found'], 404);
         } else {
             $the_User->profile;
+            // $the_User->role;
             // $the_User->permissions;
             return response()->json($the_User, 200);
         }

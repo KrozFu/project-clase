@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RolesController extends Controller
 {
@@ -52,5 +53,21 @@ class RolesController extends Controller
             $the_Role->delete();
             return response()->json(null, 204);
         }
+    }
+
+    public function count($id)
+    {
+        $SQLConsulta = "SELECT countRoles($id) as value";
+        $consulta = DB::select($SQLConsulta, array());
+        return $consulta;
+    }
+
+    public function quantitiesByRoles()
+    {
+        // De adminsitradores hay tanto, un listado de registros
+        // Usar procedimiento almacenado
+        $SQLconsulta = "call quantity_by_role()";
+        $consulta = DB::select($SQLconsulta, array());
+        return $consulta;
     }
 }

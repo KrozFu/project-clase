@@ -13,7 +13,8 @@ class Profile extends Model
         'id',
         'phone_number',
         'url_facebook',
-        'user_id'
+        'user_id',
+        'url_avatar'
     ];
 
     //indicear que le pertenece a un usuario

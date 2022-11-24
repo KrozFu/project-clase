@@ -8,7 +8,6 @@ use App\Http\Controllers\SecurityController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
-use App\Models\Profile;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +27,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::controller(UserController::class)->group(function () {
     Route::get('users', 'index'); //Para obtener todos
     Route::get('users/{id}', 'show'); //Para consultar especifico
+    // Route::get('users/{id}', 'show')->middleware(['user-access', 'permission-access']);
+
+    // Route::get('users', 'index')->middleware(['user-access']);
+    // Route::get('users/{id}', 'show')->middleware(['user-access']);
     Route::post('users', 'store'); //Para guardar
     Route::put('users/{id}', 'update'); //Para actualizar
     Route::delete('users/{id}', 'destroy'); //Para eliminar un registro
@@ -55,6 +58,8 @@ Route::controller(RolesController::class)->group(function () {
     Route::post('roles', 'store'); //Para guardar
     Route::put('roles/{id}', 'update'); //Para actualizar
     Route::delete('roles/{id}', 'destroy'); //Para eliminar un registro
+    Route::get('roles/reports/count/{id}', 'count');
+    Route::get('roles/reports/quantity-by-roles', 'quantitiesByRoles');
 });
 
 Route::controller(Permission_RoleController::class)->group(function () {
